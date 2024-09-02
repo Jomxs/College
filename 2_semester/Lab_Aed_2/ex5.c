@@ -23,13 +23,11 @@ int mod(int x, int y) {
 
 
 void inverterString(char str[], int inicio, int fim) {
-    if (inicio >= fim) {
-        return;//pra acabar
-    } else {
-        char temp = str[inicio];
-        str[inicio] = str[fim];
-        str[fim] = temp; //oque ele explicou na aula
-        inverterString(str, inicio + 1, fim - 1);
+        if(inicio < fim){
+            char temp = str[inicio];
+            str[inicio] = str[fim];
+            str[fim] = temp; //oque ele explicou na aula
+            inverterString(str, inicio + 1, fim - 1);
     }
 }
 
