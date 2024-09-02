@@ -50,7 +50,7 @@ int x = 8, n = 4;
 
 int a = 27, b = 5;
 
-char str[] = "Aula Lab Aed 2";
+char str[50] = "Aula Lab Aed 2";
 
 int vetor[] = {1,2,4,5,7,8,12};
 int tamanho = sizeof(vetor) / sizeof(vetor[0]);
