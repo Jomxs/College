@@ -69,5 +69,6 @@ int tamanho = sizeof(vetor) / sizeof(vetor[0]);
     printf("=========================================================\n");
     printf("Exercício 04\n\n\n");
     printf("Soma do vetor = %d\n", somaVetor(vetor, tamanho));
+    printf("=========================================================\n");
 
 }
