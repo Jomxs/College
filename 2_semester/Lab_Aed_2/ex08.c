@@ -8,7 +8,7 @@ float calculaMedia(int* v, int tam);
 int main() {
     int tam, *v;
 
-    printf("Calcule a mÈdia do vetor din‚mico\n");
+    printf("Calcule a m√©dia do vetor din√¢mico\n");
     printf("==========================================\n");
     printf("Digite o tamanho do seu vetor: \n");
     scanf("%d", &tam);
@@ -17,7 +17,7 @@ int main() {
     preencheVetor(v, tam);
 
 
-    printf("A mÈdia È: %.2f\n", calculaMedia(v, tam));
+    printf("A m√©dia √©: %.2f\n", calculaMedia(v, tam));
 
     free(v);
 
