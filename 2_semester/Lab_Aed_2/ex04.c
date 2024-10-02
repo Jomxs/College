@@ -9,7 +9,7 @@ typedef struct {
 
 void registraPonto(Ponto *p) {
     printf("Coloque o valor de X:\n");
-    scanf("%f", &(p->coordX));// O operador -> È utilizado para acessar membros da struct atravÈs de um ponteiro.
+    scanf("%f", &(p->coordX));// O operador -> √© utilizado para acessar membros da struct atrav√©s de um ponteiro.
     printf("Agora coloque o valor de Y:\n");
     scanf("%f", &(p->coordY));
 }
@@ -24,9 +24,9 @@ int verificaTipoTriangulo(Ponto *p) {
     float d3 = calculaDistancia(p[2], p[0]);
 
     if (d1 == d2 && d2 == d3) {
-        return 2; // Equil·tero
+        return 2; // Equil√°tero
     } else if (d1 == d2 || d2 == d3 || d1 == d3) {
-        return 1; // IsÛsceles
+        return 1; // Is√≥sceles
     } else {
         return 3; // Escaleno
     }
@@ -45,11 +45,11 @@ int main() {
     int tipo = verificaTipoTriangulo(v);
 
     if (tipo == 1) {
-        printf("O tri‚ngulo È IsÛsceles.\n");
+        printf("O tri√¢ngulo √© Is√≥sceles.\n");
     } else if (tipo == 2) {
-        printf("O tri‚ngulo È Equil·tero.\n");
+        printf("O tri√¢ngulo √© Equil√°tero.\n");
     } else if (tipo == 3){
-        printf("O tri‚ngulo È Escaleno.\n");
+        printf("O tri√¢ngulo √© Escaleno.\n");
     } else {
       printf("Algum erro foi encontrado.\n");
     }
