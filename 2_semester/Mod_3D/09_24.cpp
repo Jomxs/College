@@ -133,7 +133,7 @@ int main(int argc, char* argv[]) {
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
     glutInitWindowSize(800, 600);
     glutInitWindowPosition(300, 100);
-    glutCreateWindow("José");
+    glutCreateWindow("JosÃ©");
 
     inicializa();
 
