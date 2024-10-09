@@ -62,10 +62,10 @@ void desenha(void) {
     glLoadIdentity();
 
     glTranslatef(deslocamentoX, deslocamentoY, 0.0f);
-    glRotatef(anguloRotacao, 0.0f, 0.0f, 1.0f); // RotaÁ„o ao redor do eixo Z
+    glRotatef(anguloRotacao, 0.0f, 0.0f, 1.0f); // Rota√ß√£o ao redor do eixo Z
     glScalef(escalaX, escalaY, 1.0f);
 
-    desenhaNome(); // Chama a funÁ„o para desenhar o nome
+    desenhaNome(); // Chama a fun√ß√£o para desenhar o nome
 
     glFlush();
 }
@@ -107,14 +107,14 @@ void listeningKey(unsigned char tecla, GLint x, GLint y) {
         deslocamentoX -= 0.1f; // Move para a esquerda
         break;
     case 'q':
-        anguloRotacao -= 5.0f; // RotaÁ„o anti-hor·ria
+        anguloRotacao -= 5.0f; // Rota√ß√£o anti-hor√°ria
         break;
     case 'e':
-        anguloRotacao += 5.0f; // RotaÁ„o hor·ria
+        anguloRotacao += 5.0f; // Rota√ß√£o hor√°ria
         break;
     }
 
-    desenha(); // Redesenha apÛs a mudanÁa
+    desenha(); // Redesenha ap√≥s a mudan√ßa
 }
 
 void reshape(int w, int h) {
@@ -130,7 +130,7 @@ int main(int argc, char* argv[]) {
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
     glutInitWindowSize(800, 600);
     glutInitWindowPosition(300, 100);
-    glutCreateWindow("JosÈ");
+    glutCreateWindow("Jos√©");
 
     inicializa();
 
