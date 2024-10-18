@@ -1,0 +1,86 @@
+.App {
+  text-align: center;
+}
+
+.Grass{
+  color: rgba(160, 245, 160, 0.5);
+}
+
+.Fire{
+  color: rgba(245, 160, 160, 0.5);
+}
+.Water{
+  color: rgba(160, 173, 245, 0.5);
+}
+.Grama{
+  pointer-events: none;
+  display: flex;
+  background-color:rgba(226, 254, 226, 0.2);
+  border-radius: 25px;
+}
+.Grama img {
+  height: 40vh; 
+  width: auto; 
+}
+
+.Grama p {
+  font-size: 22px;
+  margin: 0; 
+}
+
+.Fogo{
+  pointer-events: none;
+  display: flex;
+  background-color:rgba(231, 126, 126, 0.2);
+  border-radius: 25px;
+}
+.Fogo img {
+  height: 40vh; 
+  width: auto; 
+}
+
+.Fogo p {
+  font-size: 22px;
+  margin: 0; 
+}
+
+.Agua{
+  pointer-events: none;
+  display: flex;
+  background-color:rgba(126, 128, 231, 0.2);
+  border-radius: 25px;
+}
+.Agua img {
+  height: 40vh; 
+  width: auto; 
+}
+
+.Aguap {
+  font-size: 22px;
+  margin: 0; 
+}
+
+.card{
+  margin-bottom: 20px;
+ 
+}
+
+.a{
+  margin-top: 20px;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
