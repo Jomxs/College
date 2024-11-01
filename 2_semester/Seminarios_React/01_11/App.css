@@ -1,0 +1,348 @@
+*{
+  cursor: url(selection.png), pointer;
+}
+
+.App {
+  text-align: center;
+  cursor: url(selection.png), auto;
+}
+
+.Grass{
+  color: rgba(160, 245, 160, 0.5);
+}
+
+.Fire{
+  color: rgba(245, 160, 160, 0.5);
+}
+.Water{
+  color: rgba(160, 173, 245, 0.5);
+}
+.Bug{
+  color: rgba(229, 245, 160, 0.5);
+}
+.Common{
+  color: rgba(245, 225, 160, 0.5);
+}
+.Flying{
+  color: rgba(160, 194, 245, 0.5);
+}
+.Poison{
+  color: rgba(207, 160, 245, 0.5);
+}
+.Eletric{
+  color: rgba(239, 245, 160, 0.5);
+}
+.Ground{
+  color: rgba(245, 187, 160, 0.5);
+}
+.Grama{
+  pointer-events: none;
+  display: flex;
+  background-color:rgba(226, 254, 226, 0.2);
+  border-radius: 25px;
+}
+.Grama img {
+  height: 40vh; 
+  width: auto; 
+}
+
+.Grama p {
+  font-size: 22px;
+  margin: 0; 
+}
+
+.Fogo{
+  pointer-events: none;
+  display: flex;
+  background-color:rgba(231, 126, 126, 0.2);
+  border-radius: 25px;
+}
+.Fogo img {
+  height: 40vh; 
+  width: auto; 
+}
+
+.Fogo p {
+  font-size: 22px;
+  margin: 0; 
+}
+
+.Agua{
+  pointer-events: none;
+  display: flex;
+  background-color:rgba(126, 128, 231, 0.2);
+  border-radius: 25px;
+}
+.Agua img {
+  height: 40vh; 
+  width: auto; 
+}
+
+.Agua p {
+  font-size: 22px;
+  margin: 0; 
+}
+
+.Inseto{
+  pointer-events: none;
+  display: flex;
+  background-color:rgba(208, 231, 126, 0.2);
+  border-radius: 25px;
+}
+.Inseto img {
+  height: 40vh; 
+  width: auto; 
+}
+
+.Inseto p {
+  font-size: 22px;
+  text-align: center;
+}
+  
+.Grass{
+  color: rgba(160, 245, 160, 0.5);
+}
+  
+.Grama{
+   pointer-events: none;
+  display: flex;
+  background-color:rgba(226, 254, 226, 0.2);
+  border-radius: 25px;
+ }
+.Grama img {
+  height: 40vh; 
+  width: auto; 
+  }
+  
+.Grama p {
+  font-size: 22px;
+  margin: 0; 
+}
+  
+.Fogo{
+  pointer-events: none;
+  display: flex;
+  background-color:rgba(231, 126, 126, 0.2);
+  border-radius: 25px;
+}
+.Fogo img {
+  height: 40vh; 
+  width: auto; 
+}
+  
+.Fogo p {
+  font-size: 22px;
+  margin: 0; 
+}
+  
+.Agua{
+  pointer-events: none;
+  display: flex;
+  background-color:rgba(126, 128, 231, 0.2);
+  border-radius: 25px;
+}
+.Agua img {
+  height: 40vh; 
+  width: auto; 
+}
+  
+.Agua p {
+  font-size: 22px;
+  margin: 0; 
+}
+  
+.Inseto{
+  pointer-events: none;
+  display: flex;
+  background-color:rgba(208, 231, 126, 0.2);
+  border-radius: 25px;
+}
+.Inseto img {
+  height: 40vh; 
+  width: auto; 
+}
+  
+.Inseto p {
+  font-size: 22px;
+  margin: 0; 
+}
+  
+.Normal{
+  pointer-events: none;
+  display: flex;
+  background-color: rgba(211, 211, 211, 0.2);
+  border-radius: 25px;
+}
+.Normal img {
+  height: 40vh; 
+  width: auto; 
+}
+  
+.Normal p {
+  font-size: 22px;
+  margin: 0; 
+  background: none;
+}
+  
+.Voador{
+  pointer-events: none;
+  display: flex;
+  background-color: rgba(126, 175, 231, 0.2);
+  border-radius: 25px;
+}
+.Voador img {
+  height: 40vh; 
+  width: auto; 
+}
+  
+.Voador p {
+  font-size: 22px;
+  margin: 0; 
+  background: none;   
+}
+.card {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Três colunas de largura igual */
+  gap: 20px; /* Espaçamento entre os itens */
+  justify-items: center; /* Centraliza os itens em cada célula */
+  margin-bottom: 40px;
+}
+  
+.box {
+   margin-bottom: 20px;
+}
+  
+.a{
+  margin-top: 20px;
+}
+  
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+  
+.App-link {
+  color: #61dafb;
+}
+  
+  
+.Normal{
+  pointer-events: none;
+  display: flex;
+  background-color: rgba(219, 219, 214, 0.2);
+  border-radius: 25px;
+}
+.Normal img {
+  height: 40vh; 
+  width: auto; 
+}
+
+.Normal p {
+  font-size: 22px;
+  margin: 0; 
+  background: none;
+}
+
+.Voador{
+  pointer-events: none;
+  display: flex;
+  background-color: rgba(126, 175, 231, 0.2);
+  border-radius: 25px;
+}
+.Voador img {
+  height: 40vh; 
+  width: auto; 
+}
+
+.Voador p {
+  font-size: 22px;
+  margin: 0; 
+  background: none;   
+}
+
+.Eletrico {
+  pointer-events: none;
+  display: flex;
+  background-color: rgba(231, 224, 126, 0.2);
+  border-radius: 25px;
+}
+.Eletrico img {
+  height: 40vh; 
+  width: auto; 
+}
+
+.Eletrico p {
+  font-size: 22px;
+  margin: 0; 
+  background: none;   
+}
+.Veneno {
+  pointer-events: none;
+  display: flex;
+  background-color: rgba(198, 126, 231, 0.2);
+  border-radius: 25px;
+}
+.Veneno img {
+  height: 40vh; 
+  width: auto; 
+}
+
+.Veneno p {
+  font-size: 22px;
+  margin: 0; 
+  background: none;   
+}
+
+.Terra {
+  pointer-events: none;
+  display: flex;
+  background-color: rgba(231, 164, 126, 0.2);
+  border-radius: 25px;
+}
+.Terra img {
+  height: 40vh; 
+  width: auto; 
+}
+
+.Terra p {
+  font-size: 22px;
+  margin: 0; 
+  background: none;   
+}
+.card {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Três colunas de largura igual */
+  gap: 20px; /* Espaçamento entre os itens */
+  justify-items: center; /* Centraliza os itens em cada célula */
+  margin-bottom: 40px;
+}
+
+.box {
+  margin-bottom: 20px;
+}
+
+.a{
+  margin-top: 20px;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
