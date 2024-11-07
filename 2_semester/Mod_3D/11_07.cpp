@@ -79,6 +79,14 @@ void exibe() {
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
+    char textoPlacar[50];
+    sprintf(textoPlacar, "Gols: %d | Gafes: %d", gols, gafes);
+    glColor3f(1, 1, 1);
+    glRasterPos3f(-3.0f, 3.5f, 0);
+    for (char* c = textoPlacar; *c != '\0'; c++) {
+        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *c);
+    }
+     glPopMatrix();
     glRotatef(beta, 0, 1, 0);
     glRotatef(alpha, 1, 0, 0);
     glScalef(delta, delta, delta);
@@ -109,13 +117,7 @@ void exibe() {
     glutSolidSphere(0.3f, 40, 20);
     glPopMatrix();
 
-    char textoPlacar[50];
-    sprintf(textoPlacar, "Gols: %d | Gafes: %d", gols, gafes);
-    glColor3f(1, 1, 1);
-    glRasterPos3f(-3.0f, 3.5f, 0);
-    for (char* c = textoPlacar; *c != '\0'; c++) {
-        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_18, *c);
-    }
+
 
     glFlush();
 }
@@ -155,6 +157,9 @@ void teclado(unsigned char tecla, int x, int y) {
     if (tecla == 'r') {
         gols = 0;
         gafes = 0;
+    }
+     if (tecla == 'c') {
+       system("C:\\Users\\1525862\\Downloads\\Pasta\\nome\\bin\\Debug\\nome.exe");
     }
 
 
