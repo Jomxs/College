@@ -1,0 +1,7 @@
+1 amarelo 4.5 2.3
+2 azul -3.4 9.8
+3 verde 0.0 0.0
+4 vermelho 6.5 -4.0
+5 roxo 7.9 9.7
+6 laranja 2.1 1.2
+
