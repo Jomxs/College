@@ -21,6 +21,7 @@ Start na aplicação:
 python main.py
 
 Para rodar em container docker
+.
 
  docker build -t fastapi-crud .
  docker run -d --name fastapi-crud -p 8000:8000 fastapi-crud
