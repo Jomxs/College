@@ -1,0 +1,2200 @@
+Terminais sem uso na gramática
+
+    '%'
+
+
+Gramática
+
+    0 $accept: ProgL $end
+
+    1 ProgL: Prog
+
+    2 Prog: Prog Function
+    3     | Function
+
+    4 Function: TypeF ID '(' ParamList ')' '{' Decls Statement_Seq '}'
+    5         | TypeF ID '(' ')' '{' Decls Statement_Seq '}'
+
+    6 FunctionCall: ID '(' ArgList ')'
+    7             | ID '(' ')'
+
+    8 ArgList: Exp ',' ArgList
+    9        | Exp
+
+   10 ParamList: ParamList ',' Type ID
+   11          | Type ID
+
+   12 Decls: Decl ';' Decls
+   13      | ε
+
+   14 Decl: Type IDs
+
+   15 IDs: IDs ',' ID
+   16    | IDs ',' Atribuicao
+   17    | IDs ',' ID '[' NUM ']'
+   18    | ID '[' NUM ']'
+   19    | ID
+   20    | Atribuicao
+
+   21 TypeF: VOID
+   22      | Type
+
+   23 Type: INT
+   24     | CHAR
+   25     | FLOAT
+
+   26 Statement_Seq: Statement Statement_Seq
+   27              | Statement
+
+   28 Statement: Atribuicao ';'
+   29          | If
+   30          | For
+   31          | While
+   32          | DoWhile
+   33          | FunctionCall ';'
+   34          | RETURN ID ';'
+   35          | RETURN NUM ';'
+   36          | RETURN ';'
+
+   37 Compound_Stt: Statement
+   38             | '{' Statement_Seq '}'
+
+   39 If: IF '(' Exp ')' Compound_Stt ENDIF
+   40   | IF '(' Exp ')' Compound_Stt ELSE Compound_Stt ENDIF
+
+   41 While: WHILE '(' Exp ')' Compound_Stt
+
+   42 For: FOR '(' Atribuicao ',' Exp ',' Exp ')' Compound_Stt
+
+   43 DoWhile: DO Compound_Stt WHILE '(' Exp ')' ';'
+
+   44 Atribuicao: ID '[' NUM ']' '=' Exp
+   45           | ID '=' Exp
+
+   46 Exp: Exp '+' Exp
+   47    | Exp '-' Exp
+   48    | Exp '*' Exp
+   49    | Exp '/' Exp
+   50    | Exp '>' Exp
+   51    | Exp '<' Exp
+   52    | Exp GE Exp
+   53    | Exp LE Exp
+   54    | Exp EQ Exp
+   55    | Exp NEQ Exp
+   56    | Exp OR Exp
+   57    | Exp AND Exp
+   58    | NOT Exp
+   59    | '(' Exp ')'
+   60    | NUM
+   61    | NUM_REAL
+   62    | ID '[' Exp ']'
+   63    | ID
+   64    | CHARACTERE
+   65    | FunctionCall
+   66    | STRING
+
+
+Terminais, com as regras onde eles aparecem
+
+    $end (0) 0
+    '%' (37)
+    '(' (40) 4 5 6 7 39 40 41 42 43 59
+    ')' (41) 4 5 6 7 39 40 41 42 43 59
+    '*' (42) 48
+    '+' (43) 46
+    ',' (44) 8 10 15 16 17 42
+    '-' (45) 47
+    '/' (47) 49
+    ';' (59) 12 28 33 34 35 36 43
+    '<' (60) 51
+    '=' (61) 44 45
+    '>' (62) 50
+    '[' (91) 17 18 44 62
+    ']' (93) 17 18 44 62
+    '{' (123) 4 5 38
+    '}' (125) 4 5 38
+    error (256)
+    NUM <node> (258) 17 18 35 44 60
+    NUM_REAL <node> (259) 61
+    ID <val> (260) 4 5 6 7 10 11 15 17 18 19 34 44 45 62 63
+    FOR (261) 42
+    WHILE (262) 41 43
+    IF (263) 39 40
+    ELSE (264) 40
+    ENDIF (265) 39 40
+    CHAR (266) 24
+    INT (267) 23
+    FLOAT (268) 25
+    VOID (269) 21
+    RETURN (270) 34 35 36
+    OR (271) 56
+    AND (272) 57
+    NOT (273) 58
+    GE (274) 52
+    LE (275) 53
+    EQ (276) 54
+    NEQ (277) 55
+    DO (278) 43
+    STRING (279) 66
+    CHARACTERE <node> (280) 64
+
+
+Não terminais com as regras onde eles aparecem
+
+    $accept (42)
+        à esquerda: 0
+    ProgL (43)
+        à esquerda: 1
+        à direita: 0
+    Prog <node> (44)
+        à esquerda: 2 3
+        à direita: 1 2
+    Function <node> (45)
+        à esquerda: 4 5
+        à direita: 2 3
+    FunctionCall <node> (46)
+        à esquerda: 6 7
+        à direita: 33 65
+    ArgList <id_list> (47)
+        à esquerda: 8 9
+        à direita: 6 8
+    ParamList <id_list> (48)
+        à esquerda: 10 11
+        à direita: 4 10
+    Decls (49)
+        à esquerda: 12 13
+        à direita: 4 5 12
+    Decl (50)
+        à esquerda: 14
+        à direita: 12
+    IDs <id_list> (51)
+        à esquerda: 15 16 17 18 19 20
+        à direita: 14 15 16 17
+    TypeF <val> (52)
+        à esquerda: 21 22
+        à direita: 4 5
+    Type <val> (53)
+        à esquerda: 23 24 25
+        à direita: 10 11 14 22
+    Statement_Seq <node> (54)
+        à esquerda: 26 27
+        à direita: 4 5 26 38
+    Statement <node> (55)
+        à esquerda: 28 29 30 31 32 33 34 35 36
+        à direita: 26 27 37
+    Compound_Stt <node> (56)
+        à esquerda: 37 38
+        à direita: 39 40 41 42 43
+    If <node> (57)
+        à esquerda: 39 40
+        à direita: 29
+    While <node> (58)
+        à esquerda: 41
+        à direita: 31
+    For <node> (59)
+        à esquerda: 42
+        à direita: 30
+    DoWhile <node> (60)
+        à esquerda: 43
+        à direita: 32
+    Atribuicao <node> (61)
+        à esquerda: 44 45
+        à direita: 16 20 28 42
+    Exp <node> (62)
+        à esquerda: 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66
+        à direita: 8 9 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 62
+
+
+Estado 0
+
+    0 $accept: • ProgL $end
+
+    CHAR   deslocar, e ir ao estado 1
+    INT    deslocar, e ir ao estado 2
+    FLOAT  deslocar, e ir ao estado 3
+    VOID   deslocar, e ir ao estado 4
+
+    ProgL     ir ao estado 5
+    Prog      ir ao estado 6
+    Function  ir ao estado 7
+    TypeF     ir ao estado 8
+    Type      ir ao estado 9
+
+
+Estado 1
+
+   24 Type: CHAR •
+
+    $padrão  reduzir usando a regra 24 (Type)
+
+
+Estado 2
+
+   23 Type: INT •
+
+    $padrão  reduzir usando a regra 23 (Type)
+
+
+Estado 3
+
+   25 Type: FLOAT •
+
+    $padrão  reduzir usando a regra 25 (Type)
+
+
+Estado 4
+
+   21 TypeF: VOID •
+
+    $padrão  reduzir usando a regra 21 (TypeF)
+
+
+Estado 5
+
+    0 $accept: ProgL • $end
+
+    $end  deslocar, e ir ao estado 10
+
+
+Estado 6
+
+    1 ProgL: Prog •
+    2 Prog: Prog • Function
+
+    CHAR   deslocar, e ir ao estado 1
+    INT    deslocar, e ir ao estado 2
+    FLOAT  deslocar, e ir ao estado 3
+    VOID   deslocar, e ir ao estado 4
+
+    $padrão  reduzir usando a regra 1 (ProgL)
+
+    Function  ir ao estado 11
+    TypeF     ir ao estado 8
+    Type      ir ao estado 9
+
+
+Estado 7
+
+    3 Prog: Function •
+
+    $padrão  reduzir usando a regra 3 (Prog)
+
+
+Estado 8
+
+    4 Function: TypeF • ID '(' ParamList ')' '{' Decls Statement_Seq '}'
+    5         | TypeF • ID '(' ')' '{' Decls Statement_Seq '}'
+
+    ID  deslocar, e ir ao estado 12
+
+
+Estado 9
+
+   22 TypeF: Type •
+
+    $padrão  reduzir usando a regra 22 (TypeF)
+
+
+Estado 10
+
+    0 $accept: ProgL $end •
+
+    $padrão  aceitar
+
+
+Estado 11
+
+    2 Prog: Prog Function •
+
+    $padrão  reduzir usando a regra 2 (Prog)
+
+
+Estado 12
+
+    4 Function: TypeF ID • '(' ParamList ')' '{' Decls Statement_Seq '}'
+    5         | TypeF ID • '(' ')' '{' Decls Statement_Seq '}'
+
+    '('  deslocar, e ir ao estado 13
+
+
+Estado 13
+
+    4 Function: TypeF ID '(' • ParamList ')' '{' Decls Statement_Seq '}'
+    5         | TypeF ID '(' • ')' '{' Decls Statement_Seq '}'
+
+    CHAR   deslocar, e ir ao estado 1
+    INT    deslocar, e ir ao estado 2
+    FLOAT  deslocar, e ir ao estado 3
+    ')'    deslocar, e ir ao estado 14
+
+    ParamList  ir ao estado 15
+    Type       ir ao estado 16
+
+
+Estado 14
+
+    5 Function: TypeF ID '(' ')' • '{' Decls Statement_Seq '}'
+
+    '{'  deslocar, e ir ao estado 17
+
+
+Estado 15
+
+    4 Function: TypeF ID '(' ParamList • ')' '{' Decls Statement_Seq '}'
+   10 ParamList: ParamList • ',' Type ID
+
+    ')'  deslocar, e ir ao estado 18
+    ','  deslocar, e ir ao estado 19
+
+
+Estado 16
+
+   11 ParamList: Type • ID
+
+    ID  deslocar, e ir ao estado 20
+
+
+Estado 17
+
+    5 Function: TypeF ID '(' ')' '{' • Decls Statement_Seq '}'
+
+    CHAR   deslocar, e ir ao estado 1
+    INT    deslocar, e ir ao estado 2
+    FLOAT  deslocar, e ir ao estado 3
+
+    $padrão  reduzir usando a regra 13 (Decls)
+
+    Decls  ir ao estado 21
+    Decl   ir ao estado 22
+    Type   ir ao estado 23
+
+
+Estado 18
+
+    4 Function: TypeF ID '(' ParamList ')' • '{' Decls Statement_Seq '}'
+
+    '{'  deslocar, e ir ao estado 24
+
+
+Estado 19
+
+   10 ParamList: ParamList ',' • Type ID
+
+    CHAR   deslocar, e ir ao estado 1
+    INT    deslocar, e ir ao estado 2
+    FLOAT  deslocar, e ir ao estado 3
+
+    Type  ir ao estado 25
+
+
+Estado 20
+
+   11 ParamList: Type ID •
+
+    $padrão  reduzir usando a regra 11 (ParamList)
+
+
+Estado 21
+
+    5 Function: TypeF ID '(' ')' '{' Decls • Statement_Seq '}'
+
+    ID      deslocar, e ir ao estado 26
+    FOR     deslocar, e ir ao estado 27
+    WHILE   deslocar, e ir ao estado 28
+    IF      deslocar, e ir ao estado 29
+    RETURN  deslocar, e ir ao estado 30
+    DO      deslocar, e ir ao estado 31
+
+    FunctionCall   ir ao estado 32
+    Statement_Seq  ir ao estado 33
+    Statement      ir ao estado 34
+    If             ir ao estado 35
+    While          ir ao estado 36
+    For            ir ao estado 37
+    DoWhile        ir ao estado 38
+    Atribuicao     ir ao estado 39
+
+
+Estado 22
+
+   12 Decls: Decl • ';' Decls
+
+    ';'  deslocar, e ir ao estado 40
+
+
+Estado 23
+
+   14 Decl: Type • IDs
+
+    ID  deslocar, e ir ao estado 41
+
+    IDs         ir ao estado 42
+    Atribuicao  ir ao estado 43
+
+
+Estado 24
+
+    4 Function: TypeF ID '(' ParamList ')' '{' • Decls Statement_Seq '}'
+
+    CHAR   deslocar, e ir ao estado 1
+    INT    deslocar, e ir ao estado 2
+    FLOAT  deslocar, e ir ao estado 3
+
+    $padrão  reduzir usando a regra 13 (Decls)
+
+    Decls  ir ao estado 44
+    Decl   ir ao estado 22
+    Type   ir ao estado 23
+
+
+Estado 25
+
+   10 ParamList: ParamList ',' Type • ID
+
+    ID  deslocar, e ir ao estado 45
+
+
+Estado 26
+
+    6 FunctionCall: ID • '(' ArgList ')'
+    7             | ID • '(' ')'
+   44 Atribuicao: ID • '[' NUM ']' '=' Exp
+   45           | ID • '=' Exp
+
+    '='  deslocar, e ir ao estado 46
+    '('  deslocar, e ir ao estado 47
+    '['  deslocar, e ir ao estado 48
+
+
+Estado 27
+
+   42 For: FOR • '(' Atribuicao ',' Exp ',' Exp ')' Compound_Stt
+
+    '('  deslocar, e ir ao estado 49
+
+
+Estado 28
+
+   41 While: WHILE • '(' Exp ')' Compound_Stt
+
+    '('  deslocar, e ir ao estado 50
+
+
+Estado 29
+
+   39 If: IF • '(' Exp ')' Compound_Stt ENDIF
+   40   | IF • '(' Exp ')' Compound_Stt ELSE Compound_Stt ENDIF
+
+    '('  deslocar, e ir ao estado 51
+
+
+Estado 30
+
+   34 Statement: RETURN • ID ';'
+   35          | RETURN • NUM ';'
+   36          | RETURN • ';'
+
+    NUM  deslocar, e ir ao estado 52
+    ID   deslocar, e ir ao estado 53
+    ';'  deslocar, e ir ao estado 54
+
+
+Estado 31
+
+   43 DoWhile: DO • Compound_Stt WHILE '(' Exp ')' ';'
+
+    ID      deslocar, e ir ao estado 26
+    FOR     deslocar, e ir ao estado 27
+    WHILE   deslocar, e ir ao estado 28
+    IF      deslocar, e ir ao estado 29
+    RETURN  deslocar, e ir ao estado 30
+    DO      deslocar, e ir ao estado 31
+    '{'     deslocar, e ir ao estado 55
+
+    FunctionCall  ir ao estado 32
+    Statement     ir ao estado 56
+    Compound_Stt  ir ao estado 57
+    If            ir ao estado 35
+    While         ir ao estado 36
+    For           ir ao estado 37
+    DoWhile       ir ao estado 38
+    Atribuicao    ir ao estado 39
+
+
+Estado 32
+
+   33 Statement: FunctionCall • ';'
+
+    ';'  deslocar, e ir ao estado 58
+
+
+Estado 33
+
+    5 Function: TypeF ID '(' ')' '{' Decls Statement_Seq • '}'
+
+    '}'  deslocar, e ir ao estado 59
+
+
+Estado 34
+
+   26 Statement_Seq: Statement • Statement_Seq
+   27              | Statement •
+
+    ID      deslocar, e ir ao estado 26
+    FOR     deslocar, e ir ao estado 27
+    WHILE   deslocar, e ir ao estado 28
+    IF      deslocar, e ir ao estado 29
+    RETURN  deslocar, e ir ao estado 30
+    DO      deslocar, e ir ao estado 31
+
+    $padrão  reduzir usando a regra 27 (Statement_Seq)
+
+    FunctionCall   ir ao estado 32
+    Statement_Seq  ir ao estado 60
+    Statement      ir ao estado 34
+    If             ir ao estado 35
+    While          ir ao estado 36
+    For            ir ao estado 37
+    DoWhile        ir ao estado 38
+    Atribuicao     ir ao estado 39
+
+
+Estado 35
+
+   29 Statement: If •
+
+    $padrão  reduzir usando a regra 29 (Statement)
+
+
+Estado 36
+
+   31 Statement: While •
+
+    $padrão  reduzir usando a regra 31 (Statement)
+
+
+Estado 37
+
+   30 Statement: For •
+
+    $padrão  reduzir usando a regra 30 (Statement)
+
+
+Estado 38
+
+   32 Statement: DoWhile •
+
+    $padrão  reduzir usando a regra 32 (Statement)
+
+
+Estado 39
+
+   28 Statement: Atribuicao • ';'
+
+    ';'  deslocar, e ir ao estado 61
+
+
+Estado 40
+
+   12 Decls: Decl ';' • Decls
+
+    CHAR   deslocar, e ir ao estado 1
+    INT    deslocar, e ir ao estado 2
+    FLOAT  deslocar, e ir ao estado 3
+
+    $padrão  reduzir usando a regra 13 (Decls)
+
+    Decls  ir ao estado 62
+    Decl   ir ao estado 22
+    Type   ir ao estado 23
+
+
+Estado 41
+
+   18 IDs: ID • '[' NUM ']'
+   19    | ID •
+   44 Atribuicao: ID • '[' NUM ']' '=' Exp
+   45           | ID • '=' Exp
+
+    '='  deslocar, e ir ao estado 46
+    '['  deslocar, e ir ao estado 63
+
+    $padrão  reduzir usando a regra 19 (IDs)
+
+
+Estado 42
+
+   14 Decl: Type IDs •
+   15 IDs: IDs • ',' ID
+   16    | IDs • ',' Atribuicao
+   17    | IDs • ',' ID '[' NUM ']'
+
+    ','  deslocar, e ir ao estado 64
+
+    $padrão  reduzir usando a regra 14 (Decl)
+
+
+Estado 43
+
+   20 IDs: Atribuicao •
+
+    $padrão  reduzir usando a regra 20 (IDs)
+
+
+Estado 44
+
+    4 Function: TypeF ID '(' ParamList ')' '{' Decls • Statement_Seq '}'
+
+    ID      deslocar, e ir ao estado 26
+    FOR     deslocar, e ir ao estado 27
+    WHILE   deslocar, e ir ao estado 28
+    IF      deslocar, e ir ao estado 29
+    RETURN  deslocar, e ir ao estado 30
+    DO      deslocar, e ir ao estado 31
+
+    FunctionCall   ir ao estado 32
+    Statement_Seq  ir ao estado 65
+    Statement      ir ao estado 34
+    If             ir ao estado 35
+    While          ir ao estado 36
+    For            ir ao estado 37
+    DoWhile        ir ao estado 38
+    Atribuicao     ir ao estado 39
+
+
+Estado 45
+
+   10 ParamList: ParamList ',' Type ID •
+
+    $padrão  reduzir usando a regra 10 (ParamList)
+
+
+Estado 46
+
+   45 Atribuicao: ID '=' • Exp
+
+    NUM         deslocar, e ir ao estado 66
+    NUM_REAL    deslocar, e ir ao estado 67
+    ID          deslocar, e ir ao estado 68
+    NOT         deslocar, e ir ao estado 69
+    STRING      deslocar, e ir ao estado 70
+    CHARACTERE  deslocar, e ir ao estado 71
+    '('         deslocar, e ir ao estado 72
+
+    FunctionCall  ir ao estado 73
+    Exp           ir ao estado 74
+
+
+Estado 47
+
+    6 FunctionCall: ID '(' • ArgList ')'
+    7             | ID '(' • ')'
+
+    NUM         deslocar, e ir ao estado 66
+    NUM_REAL    deslocar, e ir ao estado 67
+    ID          deslocar, e ir ao estado 68
+    NOT         deslocar, e ir ao estado 69
+    STRING      deslocar, e ir ao estado 70
+    CHARACTERE  deslocar, e ir ao estado 71
+    '('         deslocar, e ir ao estado 72
+    ')'         deslocar, e ir ao estado 75
+
+    FunctionCall  ir ao estado 73
+    ArgList       ir ao estado 76
+    Exp           ir ao estado 77
+
+
+Estado 48
+
+   44 Atribuicao: ID '[' • NUM ']' '=' Exp
+
+    NUM  deslocar, e ir ao estado 78
+
+
+Estado 49
+
+   42 For: FOR '(' • Atribuicao ',' Exp ',' Exp ')' Compound_Stt
+
+    ID  deslocar, e ir ao estado 79
+
+    Atribuicao  ir ao estado 80
+
+
+Estado 50
+
+   41 While: WHILE '(' • Exp ')' Compound_Stt
+
+    NUM         deslocar, e ir ao estado 66
+    NUM_REAL    deslocar, e ir ao estado 67
+    ID          deslocar, e ir ao estado 68
+    NOT         deslocar, e ir ao estado 69
+    STRING      deslocar, e ir ao estado 70
+    CHARACTERE  deslocar, e ir ao estado 71
+    '('         deslocar, e ir ao estado 72
+
+    FunctionCall  ir ao estado 73
+    Exp           ir ao estado 81
+
+
+Estado 51
+
+   39 If: IF '(' • Exp ')' Compound_Stt ENDIF
+   40   | IF '(' • Exp ')' Compound_Stt ELSE Compound_Stt ENDIF
+
+    NUM         deslocar, e ir ao estado 66
+    NUM_REAL    deslocar, e ir ao estado 67
+    ID          deslocar, e ir ao estado 68
+    NOT         deslocar, e ir ao estado 69
+    STRING      deslocar, e ir ao estado 70
+    CHARACTERE  deslocar, e ir ao estado 71
+    '('         deslocar, e ir ao estado 72
+
+    FunctionCall  ir ao estado 73
+    Exp           ir ao estado 82
+
+
+Estado 52
+
+   35 Statement: RETURN NUM • ';'
+
+    ';'  deslocar, e ir ao estado 83
+
+
+Estado 53
+
+   34 Statement: RETURN ID • ';'
+
+    ';'  deslocar, e ir ao estado 84
+
+
+Estado 54
+
+   36 Statement: RETURN ';' •
+
+    $padrão  reduzir usando a regra 36 (Statement)
+
+
+Estado 55
+
+   38 Compound_Stt: '{' • Statement_Seq '}'
+
+    ID      deslocar, e ir ao estado 26
+    FOR     deslocar, e ir ao estado 27
+    WHILE   deslocar, e ir ao estado 28
+    IF      deslocar, e ir ao estado 29
+    RETURN  deslocar, e ir ao estado 30
+    DO      deslocar, e ir ao estado 31
+
+    FunctionCall   ir ao estado 32
+    Statement_Seq  ir ao estado 85
+    Statement      ir ao estado 34
+    If             ir ao estado 35
+    While          ir ao estado 36
+    For            ir ao estado 37
+    DoWhile        ir ao estado 38
+    Atribuicao     ir ao estado 39
+
+
+Estado 56
+
+   37 Compound_Stt: Statement •
+
+    $padrão  reduzir usando a regra 37 (Compound_Stt)
+
+
+Estado 57
+
+   43 DoWhile: DO Compound_Stt • WHILE '(' Exp ')' ';'
+
+    WHILE  deslocar, e ir ao estado 86
+
+
+Estado 58
+
+   33 Statement: FunctionCall ';' •
+
+    $padrão  reduzir usando a regra 33 (Statement)
+
+
+Estado 59
+
+    5 Function: TypeF ID '(' ')' '{' Decls Statement_Seq '}' •
+
+    $padrão  reduzir usando a regra 5 (Function)
+
+
+Estado 60
+
+   26 Statement_Seq: Statement Statement_Seq •
+
+    $padrão  reduzir usando a regra 26 (Statement_Seq)
+
+
+Estado 61
+
+   28 Statement: Atribuicao ';' •
+
+    $padrão  reduzir usando a regra 28 (Statement)
+
+
+Estado 62
+
+   12 Decls: Decl ';' Decls •
+
+    $padrão  reduzir usando a regra 12 (Decls)
+
+
+Estado 63
+
+   18 IDs: ID '[' • NUM ']'
+   44 Atribuicao: ID '[' • NUM ']' '=' Exp
+
+    NUM  deslocar, e ir ao estado 87
+
+
+Estado 64
+
+   15 IDs: IDs ',' • ID
+   16    | IDs ',' • Atribuicao
+   17    | IDs ',' • ID '[' NUM ']'
+
+    ID  deslocar, e ir ao estado 88
+
+    Atribuicao  ir ao estado 89
+
+
+Estado 65
+
+    4 Function: TypeF ID '(' ParamList ')' '{' Decls Statement_Seq • '}'
+
+    '}'  deslocar, e ir ao estado 90
+
+
+Estado 66
+
+   60 Exp: NUM •
+
+    $padrão  reduzir usando a regra 60 (Exp)
+
+
+Estado 67
+
+   61 Exp: NUM_REAL •
+
+    $padrão  reduzir usando a regra 61 (Exp)
+
+
+Estado 68
+
+    6 FunctionCall: ID • '(' ArgList ')'
+    7             | ID • '(' ')'
+   62 Exp: ID • '[' Exp ']'
+   63    | ID •
+
+    '('  deslocar, e ir ao estado 47
+    '['  deslocar, e ir ao estado 91
+
+    $padrão  reduzir usando a regra 63 (Exp)
+
+
+Estado 69
+
+   58 Exp: NOT • Exp
+
+    NUM         deslocar, e ir ao estado 66
+    NUM_REAL    deslocar, e ir ao estado 67
+    ID          deslocar, e ir ao estado 68
+    NOT         deslocar, e ir ao estado 69
+    STRING      deslocar, e ir ao estado 70
+    CHARACTERE  deslocar, e ir ao estado 71
+    '('         deslocar, e ir ao estado 72
+
+    FunctionCall  ir ao estado 73
+    Exp           ir ao estado 92
+
+
+Estado 70
+
+   66 Exp: STRING •
+
+    $padrão  reduzir usando a regra 66 (Exp)
+
+
+Estado 71
+
+   64 Exp: CHARACTERE •
+
+    $padrão  reduzir usando a regra 64 (Exp)
+
+
+Estado 72
+
+   59 Exp: '(' • Exp ')'
+
+    NUM         deslocar, e ir ao estado 66
+    NUM_REAL    deslocar, e ir ao estado 67
+    ID          deslocar, e ir ao estado 68
+    NOT         deslocar, e ir ao estado 69
+    STRING      deslocar, e ir ao estado 70
+    CHARACTERE  deslocar, e ir ao estado 71
+    '('         deslocar, e ir ao estado 72
+
+    FunctionCall  ir ao estado 73
+    Exp           ir ao estado 93
+
+
+Estado 73
+
+   65 Exp: FunctionCall •
+
+    $padrão  reduzir usando a regra 65 (Exp)
+
+
+Estado 74
+
+   45 Atribuicao: ID '=' Exp •
+   46 Exp: Exp • '+' Exp
+   47    | Exp • '-' Exp
+   48    | Exp • '*' Exp
+   49    | Exp • '/' Exp
+   50    | Exp • '>' Exp
+   51    | Exp • '<' Exp
+   52    | Exp • GE Exp
+   53    | Exp • LE Exp
+   54    | Exp • EQ Exp
+   55    | Exp • NEQ Exp
+   56    | Exp • OR Exp
+   57    | Exp • AND Exp
+
+    OR   deslocar, e ir ao estado 94
+    AND  deslocar, e ir ao estado 95
+    GE   deslocar, e ir ao estado 96
+    LE   deslocar, e ir ao estado 97
+    EQ   deslocar, e ir ao estado 98
+    NEQ  deslocar, e ir ao estado 99
+    '>'  deslocar, e ir ao estado 100
+    '<'  deslocar, e ir ao estado 101
+    '+'  deslocar, e ir ao estado 102
+    '-'  deslocar, e ir ao estado 103
+    '*'  deslocar, e ir ao estado 104
+    '/'  deslocar, e ir ao estado 105
+
+    $padrão  reduzir usando a regra 45 (Atribuicao)
+
+
+Estado 75
+
+    7 FunctionCall: ID '(' ')' •
+
+    $padrão  reduzir usando a regra 7 (FunctionCall)
+
+
+Estado 76
+
+    6 FunctionCall: ID '(' ArgList • ')'
+
+    ')'  deslocar, e ir ao estado 106
+
+
+Estado 77
+
+    8 ArgList: Exp • ',' ArgList
+    9        | Exp •
+   46 Exp: Exp • '+' Exp
+   47    | Exp • '-' Exp
+   48    | Exp • '*' Exp
+   49    | Exp • '/' Exp
+   50    | Exp • '>' Exp
+   51    | Exp • '<' Exp
+   52    | Exp • GE Exp
+   53    | Exp • LE Exp
+   54    | Exp • EQ Exp
+   55    | Exp • NEQ Exp
+   56    | Exp • OR Exp
+   57    | Exp • AND Exp
+
+    OR   deslocar, e ir ao estado 94
+    AND  deslocar, e ir ao estado 95
+    GE   deslocar, e ir ao estado 96
+    LE   deslocar, e ir ao estado 97
+    EQ   deslocar, e ir ao estado 98
+    NEQ  deslocar, e ir ao estado 99
+    '>'  deslocar, e ir ao estado 100
+    '<'  deslocar, e ir ao estado 101
+    '+'  deslocar, e ir ao estado 102
+    '-'  deslocar, e ir ao estado 103
+    '*'  deslocar, e ir ao estado 104
+    '/'  deslocar, e ir ao estado 105
+    ','  deslocar, e ir ao estado 107
+
+    $padrão  reduzir usando a regra 9 (ArgList)
+
+
+Estado 78
+
+   44 Atribuicao: ID '[' NUM • ']' '=' Exp
+
+    ']'  deslocar, e ir ao estado 108
+
+
+Estado 79
+
+   44 Atribuicao: ID • '[' NUM ']' '=' Exp
+   45           | ID • '=' Exp
+
+    '='  deslocar, e ir ao estado 46
+    '['  deslocar, e ir ao estado 48
+
+
+Estado 80
+
+   42 For: FOR '(' Atribuicao • ',' Exp ',' Exp ')' Compound_Stt
+
+    ','  deslocar, e ir ao estado 109
+
+
+Estado 81
+
+   41 While: WHILE '(' Exp • ')' Compound_Stt
+   46 Exp: Exp • '+' Exp
+   47    | Exp • '-' Exp
+   48    | Exp • '*' Exp
+   49    | Exp • '/' Exp
+   50    | Exp • '>' Exp
+   51    | Exp • '<' Exp
+   52    | Exp • GE Exp
+   53    | Exp • LE Exp
+   54    | Exp • EQ Exp
+   55    | Exp • NEQ Exp
+   56    | Exp • OR Exp
+   57    | Exp • AND Exp
+
+    OR   deslocar, e ir ao estado 94
+    AND  deslocar, e ir ao estado 95
+    GE   deslocar, e ir ao estado 96
+    LE   deslocar, e ir ao estado 97
+    EQ   deslocar, e ir ao estado 98
+    NEQ  deslocar, e ir ao estado 99
+    '>'  deslocar, e ir ao estado 100
+    '<'  deslocar, e ir ao estado 101
+    '+'  deslocar, e ir ao estado 102
+    '-'  deslocar, e ir ao estado 103
+    '*'  deslocar, e ir ao estado 104
+    '/'  deslocar, e ir ao estado 105
+    ')'  deslocar, e ir ao estado 110
+
+
+Estado 82
+
+   39 If: IF '(' Exp • ')' Compound_Stt ENDIF
+   40   | IF '(' Exp • ')' Compound_Stt ELSE Compound_Stt ENDIF
+   46 Exp: Exp • '+' Exp
+   47    | Exp • '-' Exp
+   48    | Exp • '*' Exp
+   49    | Exp • '/' Exp
+   50    | Exp • '>' Exp
+   51    | Exp • '<' Exp
+   52    | Exp • GE Exp
+   53    | Exp • LE Exp
+   54    | Exp • EQ Exp
+   55    | Exp • NEQ Exp
+   56    | Exp • OR Exp
+   57    | Exp • AND Exp
+
+    OR   deslocar, e ir ao estado 94
+    AND  deslocar, e ir ao estado 95
+    GE   deslocar, e ir ao estado 96
+    LE   deslocar, e ir ao estado 97
+    EQ   deslocar, e ir ao estado 98
+    NEQ  deslocar, e ir ao estado 99
+    '>'  deslocar, e ir ao estado 100
+    '<'  deslocar, e ir ao estado 101
+    '+'  deslocar, e ir ao estado 102
+    '-'  deslocar, e ir ao estado 103
+    '*'  deslocar, e ir ao estado 104
+    '/'  deslocar, e ir ao estado 105
+    ')'  deslocar, e ir ao estado 111
+
+
+Estado 83
+
+   35 Statement: RETURN NUM ';' •
+
+    $padrão  reduzir usando a regra 35 (Statement)
+
+
+Estado 84
+
+   34 Statement: RETURN ID ';' •
+
+    $padrão  reduzir usando a regra 34 (Statement)
+
+
+Estado 85
+
+   38 Compound_Stt: '{' Statement_Seq • '}'
+
+    '}'  deslocar, e ir ao estado 112
+
+
+Estado 86
+
+   43 DoWhile: DO Compound_Stt WHILE • '(' Exp ')' ';'
+
+    '('  deslocar, e ir ao estado 113
+
+
+Estado 87
+
+   18 IDs: ID '[' NUM • ']'
+   44 Atribuicao: ID '[' NUM • ']' '=' Exp
+
+    ']'  deslocar, e ir ao estado 114
+
+
+Estado 88
+
+   15 IDs: IDs ',' ID •
+   17    | IDs ',' ID • '[' NUM ']'
+   44 Atribuicao: ID • '[' NUM ']' '=' Exp
+   45           | ID • '=' Exp
+
+    '='  deslocar, e ir ao estado 46
+    '['  deslocar, e ir ao estado 115
+
+    $padrão  reduzir usando a regra 15 (IDs)
+
+
+Estado 89
+
+   16 IDs: IDs ',' Atribuicao •
+
+    $padrão  reduzir usando a regra 16 (IDs)
+
+
+Estado 90
+
+    4 Function: TypeF ID '(' ParamList ')' '{' Decls Statement_Seq '}' •
+
+    $padrão  reduzir usando a regra 4 (Function)
+
+
+Estado 91
+
+   62 Exp: ID '[' • Exp ']'
+
+    NUM         deslocar, e ir ao estado 66
+    NUM_REAL    deslocar, e ir ao estado 67
+    ID          deslocar, e ir ao estado 68
+    NOT         deslocar, e ir ao estado 69
+    STRING      deslocar, e ir ao estado 70
+    CHARACTERE  deslocar, e ir ao estado 71
+    '('         deslocar, e ir ao estado 72
+
+    FunctionCall  ir ao estado 73
+    Exp           ir ao estado 116
+
+
+Estado 92
+
+   46 Exp: Exp • '+' Exp
+   47    | Exp • '-' Exp
+   48    | Exp • '*' Exp
+   49    | Exp • '/' Exp
+   50    | Exp • '>' Exp
+   51    | Exp • '<' Exp
+   52    | Exp • GE Exp
+   53    | Exp • LE Exp
+   54    | Exp • EQ Exp
+   55    | Exp • NEQ Exp
+   56    | Exp • OR Exp
+   57    | Exp • AND Exp
+   58    | NOT Exp •
+
+    $padrão  reduzir usando a regra 58 (Exp)
+
+
+Estado 93
+
+   46 Exp: Exp • '+' Exp
+   47    | Exp • '-' Exp
+   48    | Exp • '*' Exp
+   49    | Exp • '/' Exp
+   50    | Exp • '>' Exp
+   51    | Exp • '<' Exp
+   52    | Exp • GE Exp
+   53    | Exp • LE Exp
+   54    | Exp • EQ Exp
+   55    | Exp • NEQ Exp
+   56    | Exp • OR Exp
+   57    | Exp • AND Exp
+   59    | '(' Exp • ')'
+
+    OR   deslocar, e ir ao estado 94
+    AND  deslocar, e ir ao estado 95
+    GE   deslocar, e ir ao estado 96
+    LE   deslocar, e ir ao estado 97
+    EQ   deslocar, e ir ao estado 98
+    NEQ  deslocar, e ir ao estado 99
+    '>'  deslocar, e ir ao estado 100
+    '<'  deslocar, e ir ao estado 101
+    '+'  deslocar, e ir ao estado 102
+    '-'  deslocar, e ir ao estado 103
+    '*'  deslocar, e ir ao estado 104
+    '/'  deslocar, e ir ao estado 105
+    ')'  deslocar, e ir ao estado 117
+
+
+Estado 94
+
+   56 Exp: Exp OR • Exp
+
+    NUM         deslocar, e ir ao estado 66
+    NUM_REAL    deslocar, e ir ao estado 67
+    ID          deslocar, e ir ao estado 68
+    NOT         deslocar, e ir ao estado 69
+    STRING      deslocar, e ir ao estado 70
+    CHARACTERE  deslocar, e ir ao estado 71
+    '('         deslocar, e ir ao estado 72
+
+    FunctionCall  ir ao estado 73
+    Exp           ir ao estado 118
+
+
+Estado 95
+
+   57 Exp: Exp AND • Exp
+
+    NUM         deslocar, e ir ao estado 66
+    NUM_REAL    deslocar, e ir ao estado 67
+    ID          deslocar, e ir ao estado 68
+    NOT         deslocar, e ir ao estado 69
+    STRING      deslocar, e ir ao estado 70
+    CHARACTERE  deslocar, e ir ao estado 71
+    '('         deslocar, e ir ao estado 72
+
+    FunctionCall  ir ao estado 73
+    Exp           ir ao estado 119
+
+
+Estado 96
+
+   52 Exp: Exp GE • Exp
+
+    NUM         deslocar, e ir ao estado 66
+    NUM_REAL    deslocar, e ir ao estado 67
+    ID          deslocar, e ir ao estado 68
+    NOT         deslocar, e ir ao estado 69
+    STRING      deslocar, e ir ao estado 70
+    CHARACTERE  deslocar, e ir ao estado 71
+    '('         deslocar, e ir ao estado 72
+
+    FunctionCall  ir ao estado 73
+    Exp           ir ao estado 120
+
+
+Estado 97
+
+   53 Exp: Exp LE • Exp
+
+    NUM         deslocar, e ir ao estado 66
+    NUM_REAL    deslocar, e ir ao estado 67
+    ID          deslocar, e ir ao estado 68
+    NOT         deslocar, e ir ao estado 69
+    STRING      deslocar, e ir ao estado 70
+    CHARACTERE  deslocar, e ir ao estado 71
+    '('         deslocar, e ir ao estado 72
+
+    FunctionCall  ir ao estado 73
+    Exp           ir ao estado 121
+
+
+Estado 98
+
+   54 Exp: Exp EQ • Exp
+
+    NUM         deslocar, e ir ao estado 66
+    NUM_REAL    deslocar, e ir ao estado 67
+    ID          deslocar, e ir ao estado 68
+    NOT         deslocar, e ir ao estado 69
+    STRING      deslocar, e ir ao estado 70
+    CHARACTERE  deslocar, e ir ao estado 71
+    '('         deslocar, e ir ao estado 72
+
+    FunctionCall  ir ao estado 73
+    Exp           ir ao estado 122
+
+
+Estado 99
+
+   55 Exp: Exp NEQ • Exp
+
+    NUM         deslocar, e ir ao estado 66
+    NUM_REAL    deslocar, e ir ao estado 67
+    ID          deslocar, e ir ao estado 68
+    NOT         deslocar, e ir ao estado 69
+    STRING      deslocar, e ir ao estado 70
+    CHARACTERE  deslocar, e ir ao estado 71
+    '('         deslocar, e ir ao estado 72
+
+    FunctionCall  ir ao estado 73
+    Exp           ir ao estado 123
+
+
+Estado 100
+
+   50 Exp: Exp '>' • Exp
+
+    NUM         deslocar, e ir ao estado 66
+    NUM_REAL    deslocar, e ir ao estado 67
+    ID          deslocar, e ir ao estado 68
+    NOT         deslocar, e ir ao estado 69
+    STRING      deslocar, e ir ao estado 70
+    CHARACTERE  deslocar, e ir ao estado 71
+    '('         deslocar, e ir ao estado 72
+
+    FunctionCall  ir ao estado 73
+    Exp           ir ao estado 124
+
+
+Estado 101
+
+   51 Exp: Exp '<' • Exp
+
+    NUM         deslocar, e ir ao estado 66
+    NUM_REAL    deslocar, e ir ao estado 67
+    ID          deslocar, e ir ao estado 68
+    NOT         deslocar, e ir ao estado 69
+    STRING      deslocar, e ir ao estado 70
+    CHARACTERE  deslocar, e ir ao estado 71
+    '('         deslocar, e ir ao estado 72
+
+    FunctionCall  ir ao estado 73
+    Exp           ir ao estado 125
+
+
+Estado 102
+
+   46 Exp: Exp '+' • Exp
+
+    NUM         deslocar, e ir ao estado 66
+    NUM_REAL    deslocar, e ir ao estado 67
+    ID          deslocar, e ir ao estado 68
+    NOT         deslocar, e ir ao estado 69
+    STRING      deslocar, e ir ao estado 70
+    CHARACTERE  deslocar, e ir ao estado 71
+    '('         deslocar, e ir ao estado 72
+
+    FunctionCall  ir ao estado 73
+    Exp           ir ao estado 126
+
+
+Estado 103
+
+   47 Exp: Exp '-' • Exp
+
+    NUM         deslocar, e ir ao estado 66
+    NUM_REAL    deslocar, e ir ao estado 67
+    ID          deslocar, e ir ao estado 68
+    NOT         deslocar, e ir ao estado 69
+    STRING      deslocar, e ir ao estado 70
+    CHARACTERE  deslocar, e ir ao estado 71
+    '('         deslocar, e ir ao estado 72
+
+    FunctionCall  ir ao estado 73
+    Exp           ir ao estado 127
+
+
+Estado 104
+
+   48 Exp: Exp '*' • Exp
+
+    NUM         deslocar, e ir ao estado 66
+    NUM_REAL    deslocar, e ir ao estado 67
+    ID          deslocar, e ir ao estado 68
+    NOT         deslocar, e ir ao estado 69
+    STRING      deslocar, e ir ao estado 70
+    CHARACTERE  deslocar, e ir ao estado 71
+    '('         deslocar, e ir ao estado 72
+
+    FunctionCall  ir ao estado 73
+    Exp           ir ao estado 128
+
+
+Estado 105
+
+   49 Exp: Exp '/' • Exp
+
+    NUM         deslocar, e ir ao estado 66
+    NUM_REAL    deslocar, e ir ao estado 67
+    ID          deslocar, e ir ao estado 68
+    NOT         deslocar, e ir ao estado 69
+    STRING      deslocar, e ir ao estado 70
+    CHARACTERE  deslocar, e ir ao estado 71
+    '('         deslocar, e ir ao estado 72
+
+    FunctionCall  ir ao estado 73
+    Exp           ir ao estado 129
+
+
+Estado 106
+
+    6 FunctionCall: ID '(' ArgList ')' •
+
+    $padrão  reduzir usando a regra 6 (FunctionCall)
+
+
+Estado 107
+
+    8 ArgList: Exp ',' • ArgList
+
+    NUM         deslocar, e ir ao estado 66
+    NUM_REAL    deslocar, e ir ao estado 67
+    ID          deslocar, e ir ao estado 68
+    NOT         deslocar, e ir ao estado 69
+    STRING      deslocar, e ir ao estado 70
+    CHARACTERE  deslocar, e ir ao estado 71
+    '('         deslocar, e ir ao estado 72
+
+    FunctionCall  ir ao estado 73
+    ArgList       ir ao estado 130
+    Exp           ir ao estado 77
+
+
+Estado 108
+
+   44 Atribuicao: ID '[' NUM ']' • '=' Exp
+
+    '='  deslocar, e ir ao estado 131
+
+
+Estado 109
+
+   42 For: FOR '(' Atribuicao ',' • Exp ',' Exp ')' Compound_Stt
+
+    NUM         deslocar, e ir ao estado 66
+    NUM_REAL    deslocar, e ir ao estado 67
+    ID          deslocar, e ir ao estado 68
+    NOT         deslocar, e ir ao estado 69
+    STRING      deslocar, e ir ao estado 70
+    CHARACTERE  deslocar, e ir ao estado 71
+    '('         deslocar, e ir ao estado 72
+
+    FunctionCall  ir ao estado 73
+    Exp           ir ao estado 132
+
+
+Estado 110
+
+   41 While: WHILE '(' Exp ')' • Compound_Stt
+
+    ID      deslocar, e ir ao estado 26
+    FOR     deslocar, e ir ao estado 27
+    WHILE   deslocar, e ir ao estado 28
+    IF      deslocar, e ir ao estado 29
+    RETURN  deslocar, e ir ao estado 30
+    DO      deslocar, e ir ao estado 31
+    '{'     deslocar, e ir ao estado 55
+
+    FunctionCall  ir ao estado 32
+    Statement     ir ao estado 56
+    Compound_Stt  ir ao estado 133
+    If            ir ao estado 35
+    While         ir ao estado 36
+    For           ir ao estado 37
+    DoWhile       ir ao estado 38
+    Atribuicao    ir ao estado 39
+
+
+Estado 111
+
+   39 If: IF '(' Exp ')' • Compound_Stt ENDIF
+   40   | IF '(' Exp ')' • Compound_Stt ELSE Compound_Stt ENDIF
+
+    ID      deslocar, e ir ao estado 26
+    FOR     deslocar, e ir ao estado 27
+    WHILE   deslocar, e ir ao estado 28
+    IF      deslocar, e ir ao estado 29
+    RETURN  deslocar, e ir ao estado 30
+    DO      deslocar, e ir ao estado 31
+    '{'     deslocar, e ir ao estado 55
+
+    FunctionCall  ir ao estado 32
+    Statement     ir ao estado 56
+    Compound_Stt  ir ao estado 134
+    If            ir ao estado 35
+    While         ir ao estado 36
+    For           ir ao estado 37
+    DoWhile       ir ao estado 38
+    Atribuicao    ir ao estado 39
+
+
+Estado 112
+
+   38 Compound_Stt: '{' Statement_Seq '}' •
+
+    $padrão  reduzir usando a regra 38 (Compound_Stt)
+
+
+Estado 113
+
+   43 DoWhile: DO Compound_Stt WHILE '(' • Exp ')' ';'
+
+    NUM         deslocar, e ir ao estado 66
+    NUM_REAL    deslocar, e ir ao estado 67
+    ID          deslocar, e ir ao estado 68
+    NOT         deslocar, e ir ao estado 69
+    STRING      deslocar, e ir ao estado 70
+    CHARACTERE  deslocar, e ir ao estado 71
+    '('         deslocar, e ir ao estado 72
+
+    FunctionCall  ir ao estado 73
+    Exp           ir ao estado 135
+
+
+Estado 114
+
+   18 IDs: ID '[' NUM ']' •
+   44 Atribuicao: ID '[' NUM ']' • '=' Exp
+
+    '='  deslocar, e ir ao estado 131
+
+    $padrão  reduzir usando a regra 18 (IDs)
+
+
+Estado 115
+
+   17 IDs: IDs ',' ID '[' • NUM ']'
+   44 Atribuicao: ID '[' • NUM ']' '=' Exp
+
+    NUM  deslocar, e ir ao estado 136
+
+
+Estado 116
+
+   46 Exp: Exp • '+' Exp
+   47    | Exp • '-' Exp
+   48    | Exp • '*' Exp
+   49    | Exp • '/' Exp
+   50    | Exp • '>' Exp
+   51    | Exp • '<' Exp
+   52    | Exp • GE Exp
+   53    | Exp • LE Exp
+   54    | Exp • EQ Exp
+   55    | Exp • NEQ Exp
+   56    | Exp • OR Exp
+   57    | Exp • AND Exp
+   62    | ID '[' Exp • ']'
+
+    OR   deslocar, e ir ao estado 94
+    AND  deslocar, e ir ao estado 95
+    GE   deslocar, e ir ao estado 96
+    LE   deslocar, e ir ao estado 97
+    EQ   deslocar, e ir ao estado 98
+    NEQ  deslocar, e ir ao estado 99
+    '>'  deslocar, e ir ao estado 100
+    '<'  deslocar, e ir ao estado 101
+    '+'  deslocar, e ir ao estado 102
+    '-'  deslocar, e ir ao estado 103
+    '*'  deslocar, e ir ao estado 104
+    '/'  deslocar, e ir ao estado 105
+    ']'  deslocar, e ir ao estado 137
+
+
+Estado 117
+
+   59 Exp: '(' Exp ')' •
+
+    $padrão  reduzir usando a regra 59 (Exp)
+
+
+Estado 118
+
+   46 Exp: Exp • '+' Exp
+   47    | Exp • '-' Exp
+   48    | Exp • '*' Exp
+   49    | Exp • '/' Exp
+   50    | Exp • '>' Exp
+   51    | Exp • '<' Exp
+   52    | Exp • GE Exp
+   53    | Exp • LE Exp
+   54    | Exp • EQ Exp
+   55    | Exp • NEQ Exp
+   56    | Exp • OR Exp
+   56    | Exp OR Exp •
+   57    | Exp • AND Exp
+
+    AND  deslocar, e ir ao estado 95
+    GE   deslocar, e ir ao estado 96
+    LE   deslocar, e ir ao estado 97
+    EQ   deslocar, e ir ao estado 98
+    NEQ  deslocar, e ir ao estado 99
+    '>'  deslocar, e ir ao estado 100
+    '<'  deslocar, e ir ao estado 101
+    '+'  deslocar, e ir ao estado 102
+    '-'  deslocar, e ir ao estado 103
+    '*'  deslocar, e ir ao estado 104
+    '/'  deslocar, e ir ao estado 105
+
+    $padrão  reduzir usando a regra 56 (Exp)
+
+
+Estado 119
+
+   46 Exp: Exp • '+' Exp
+   47    | Exp • '-' Exp
+   48    | Exp • '*' Exp
+   49    | Exp • '/' Exp
+   50    | Exp • '>' Exp
+   51    | Exp • '<' Exp
+   52    | Exp • GE Exp
+   53    | Exp • LE Exp
+   54    | Exp • EQ Exp
+   55    | Exp • NEQ Exp
+   56    | Exp • OR Exp
+   57    | Exp • AND Exp
+   57    | Exp AND Exp •
+
+    GE   deslocar, e ir ao estado 96
+    LE   deslocar, e ir ao estado 97
+    EQ   deslocar, e ir ao estado 98
+    NEQ  deslocar, e ir ao estado 99
+    '>'  deslocar, e ir ao estado 100
+    '<'  deslocar, e ir ao estado 101
+    '+'  deslocar, e ir ao estado 102
+    '-'  deslocar, e ir ao estado 103
+    '*'  deslocar, e ir ao estado 104
+    '/'  deslocar, e ir ao estado 105
+
+    $padrão  reduzir usando a regra 57 (Exp)
+
+
+Estado 120
+
+   46 Exp: Exp • '+' Exp
+   47    | Exp • '-' Exp
+   48    | Exp • '*' Exp
+   49    | Exp • '/' Exp
+   50    | Exp • '>' Exp
+   51    | Exp • '<' Exp
+   52    | Exp • GE Exp
+   52    | Exp GE Exp •
+   53    | Exp • LE Exp
+   54    | Exp • EQ Exp
+   55    | Exp • NEQ Exp
+   56    | Exp • OR Exp
+   57    | Exp • AND Exp
+
+    '+'  deslocar, e ir ao estado 102
+    '-'  deslocar, e ir ao estado 103
+    '*'  deslocar, e ir ao estado 104
+    '/'  deslocar, e ir ao estado 105
+
+    $padrão  reduzir usando a regra 52 (Exp)
+
+
+Estado 121
+
+   46 Exp: Exp • '+' Exp
+   47    | Exp • '-' Exp
+   48    | Exp • '*' Exp
+   49    | Exp • '/' Exp
+   50    | Exp • '>' Exp
+   51    | Exp • '<' Exp
+   52    | Exp • GE Exp
+   53    | Exp • LE Exp
+   53    | Exp LE Exp •
+   54    | Exp • EQ Exp
+   55    | Exp • NEQ Exp
+   56    | Exp • OR Exp
+   57    | Exp • AND Exp
+
+    '+'  deslocar, e ir ao estado 102
+    '-'  deslocar, e ir ao estado 103
+    '*'  deslocar, e ir ao estado 104
+    '/'  deslocar, e ir ao estado 105
+
+    $padrão  reduzir usando a regra 53 (Exp)
+
+
+Estado 122
+
+   46 Exp: Exp • '+' Exp
+   47    | Exp • '-' Exp
+   48    | Exp • '*' Exp
+   49    | Exp • '/' Exp
+   50    | Exp • '>' Exp
+   51    | Exp • '<' Exp
+   52    | Exp • GE Exp
+   53    | Exp • LE Exp
+   54    | Exp • EQ Exp
+   54    | Exp EQ Exp •
+   55    | Exp • NEQ Exp
+   56    | Exp • OR Exp
+   57    | Exp • AND Exp
+
+    GE   deslocar, e ir ao estado 96
+    LE   deslocar, e ir ao estado 97
+    '>'  deslocar, e ir ao estado 100
+    '<'  deslocar, e ir ao estado 101
+    '+'  deslocar, e ir ao estado 102
+    '-'  deslocar, e ir ao estado 103
+    '*'  deslocar, e ir ao estado 104
+    '/'  deslocar, e ir ao estado 105
+
+    EQ   erro (não associativo)
+    NEQ  erro (não associativo)
+
+    $padrão  reduzir usando a regra 54 (Exp)
+
+
+Estado 123
+
+   46 Exp: Exp • '+' Exp
+   47    | Exp • '-' Exp
+   48    | Exp • '*' Exp
+   49    | Exp • '/' Exp
+   50    | Exp • '>' Exp
+   51    | Exp • '<' Exp
+   52    | Exp • GE Exp
+   53    | Exp • LE Exp
+   54    | Exp • EQ Exp
+   55    | Exp • NEQ Exp
+   55    | Exp NEQ Exp •
+   56    | Exp • OR Exp
+   57    | Exp • AND Exp
+
+    GE   deslocar, e ir ao estado 96
+    LE   deslocar, e ir ao estado 97
+    '>'  deslocar, e ir ao estado 100
+    '<'  deslocar, e ir ao estado 101
+    '+'  deslocar, e ir ao estado 102
+    '-'  deslocar, e ir ao estado 103
+    '*'  deslocar, e ir ao estado 104
+    '/'  deslocar, e ir ao estado 105
+
+    EQ   erro (não associativo)
+    NEQ  erro (não associativo)
+
+    $padrão  reduzir usando a regra 55 (Exp)
+
+
+Estado 124
+
+   46 Exp: Exp • '+' Exp
+   47    | Exp • '-' Exp
+   48    | Exp • '*' Exp
+   49    | Exp • '/' Exp
+   50    | Exp • '>' Exp
+   50    | Exp '>' Exp •
+   51    | Exp • '<' Exp
+   52    | Exp • GE Exp
+   53    | Exp • LE Exp
+   54    | Exp • EQ Exp
+   55    | Exp • NEQ Exp
+   56    | Exp • OR Exp
+   57    | Exp • AND Exp
+
+    '+'  deslocar, e ir ao estado 102
+    '-'  deslocar, e ir ao estado 103
+    '*'  deslocar, e ir ao estado 104
+    '/'  deslocar, e ir ao estado 105
+
+    $padrão  reduzir usando a regra 50 (Exp)
+
+
+Estado 125
+
+   46 Exp: Exp • '+' Exp
+   47    | Exp • '-' Exp
+   48    | Exp • '*' Exp
+   49    | Exp • '/' Exp
+   50    | Exp • '>' Exp
+   51    | Exp • '<' Exp
+   51    | Exp '<' Exp •
+   52    | Exp • GE Exp
+   53    | Exp • LE Exp
+   54    | Exp • EQ Exp
+   55    | Exp • NEQ Exp
+   56    | Exp • OR Exp
+   57    | Exp • AND Exp
+
+    '+'  deslocar, e ir ao estado 102
+    '-'  deslocar, e ir ao estado 103
+    '*'  deslocar, e ir ao estado 104
+    '/'  deslocar, e ir ao estado 105
+
+    $padrão  reduzir usando a regra 51 (Exp)
+
+
+Estado 126
+
+   46 Exp: Exp • '+' Exp
+   46    | Exp '+' Exp •
+   47    | Exp • '-' Exp
+   48    | Exp • '*' Exp
+   49    | Exp • '/' Exp
+   50    | Exp • '>' Exp
+   51    | Exp • '<' Exp
+   52    | Exp • GE Exp
+   53    | Exp • LE Exp
+   54    | Exp • EQ Exp
+   55    | Exp • NEQ Exp
+   56    | Exp • OR Exp
+   57    | Exp • AND Exp
+
+    '*'  deslocar, e ir ao estado 104
+    '/'  deslocar, e ir ao estado 105
+
+    $padrão  reduzir usando a regra 46 (Exp)
+
+
+Estado 127
+
+   46 Exp: Exp • '+' Exp
+   47    | Exp • '-' Exp
+   47    | Exp '-' Exp •
+   48    | Exp • '*' Exp
+   49    | Exp • '/' Exp
+   50    | Exp • '>' Exp
+   51    | Exp • '<' Exp
+   52    | Exp • GE Exp
+   53    | Exp • LE Exp
+   54    | Exp • EQ Exp
+   55    | Exp • NEQ Exp
+   56    | Exp • OR Exp
+   57    | Exp • AND Exp
+
+    '*'  deslocar, e ir ao estado 104
+    '/'  deslocar, e ir ao estado 105
+
+    $padrão  reduzir usando a regra 47 (Exp)
+
+
+Estado 128
+
+   46 Exp: Exp • '+' Exp
+   47    | Exp • '-' Exp
+   48    | Exp • '*' Exp
+   48    | Exp '*' Exp •
+   49    | Exp • '/' Exp
+   50    | Exp • '>' Exp
+   51    | Exp • '<' Exp
+   52    | Exp • GE Exp
+   53    | Exp • LE Exp
+   54    | Exp • EQ Exp
+   55    | Exp • NEQ Exp
+   56    | Exp • OR Exp
+   57    | Exp • AND Exp
+
+    $padrão  reduzir usando a regra 48 (Exp)
+
+
+Estado 129
+
+   46 Exp: Exp • '+' Exp
+   47    | Exp • '-' Exp
+   48    | Exp • '*' Exp
+   49    | Exp • '/' Exp
+   49    | Exp '/' Exp •
+   50    | Exp • '>' Exp
+   51    | Exp • '<' Exp
+   52    | Exp • GE Exp
+   53    | Exp • LE Exp
+   54    | Exp • EQ Exp
+   55    | Exp • NEQ Exp
+   56    | Exp • OR Exp
+   57    | Exp • AND Exp
+
+    $padrão  reduzir usando a regra 49 (Exp)
+
+
+Estado 130
+
+    8 ArgList: Exp ',' ArgList •
+
+    $padrão  reduzir usando a regra 8 (ArgList)
+
+
+Estado 131
+
+   44 Atribuicao: ID '[' NUM ']' '=' • Exp
+
+    NUM         deslocar, e ir ao estado 66
+    NUM_REAL    deslocar, e ir ao estado 67
+    ID          deslocar, e ir ao estado 68
+    NOT         deslocar, e ir ao estado 69
+    STRING      deslocar, e ir ao estado 70
+    CHARACTERE  deslocar, e ir ao estado 71
+    '('         deslocar, e ir ao estado 72
+
+    FunctionCall  ir ao estado 73
+    Exp           ir ao estado 138
+
+
+Estado 132
+
+   42 For: FOR '(' Atribuicao ',' Exp • ',' Exp ')' Compound_Stt
+   46 Exp: Exp • '+' Exp
+   47    | Exp • '-' Exp
+   48    | Exp • '*' Exp
+   49    | Exp • '/' Exp
+   50    | Exp • '>' Exp
+   51    | Exp • '<' Exp
+   52    | Exp • GE Exp
+   53    | Exp • LE Exp
+   54    | Exp • EQ Exp
+   55    | Exp • NEQ Exp
+   56    | Exp • OR Exp
+   57    | Exp • AND Exp
+
+    OR   deslocar, e ir ao estado 94
+    AND  deslocar, e ir ao estado 95
+    GE   deslocar, e ir ao estado 96
+    LE   deslocar, e ir ao estado 97
+    EQ   deslocar, e ir ao estado 98
+    NEQ  deslocar, e ir ao estado 99
+    '>'  deslocar, e ir ao estado 100
+    '<'  deslocar, e ir ao estado 101
+    '+'  deslocar, e ir ao estado 102
+    '-'  deslocar, e ir ao estado 103
+    '*'  deslocar, e ir ao estado 104
+    '/'  deslocar, e ir ao estado 105
+    ','  deslocar, e ir ao estado 139
+
+
+Estado 133
+
+   41 While: WHILE '(' Exp ')' Compound_Stt •
+
+    $padrão  reduzir usando a regra 41 (While)
+
+
+Estado 134
+
+   39 If: IF '(' Exp ')' Compound_Stt • ENDIF
+   40   | IF '(' Exp ')' Compound_Stt • ELSE Compound_Stt ENDIF
+
+    ELSE   deslocar, e ir ao estado 140
+    ENDIF  deslocar, e ir ao estado 141
+
+
+Estado 135
+
+   43 DoWhile: DO Compound_Stt WHILE '(' Exp • ')' ';'
+   46 Exp: Exp • '+' Exp
+   47    | Exp • '-' Exp
+   48    | Exp • '*' Exp
+   49    | Exp • '/' Exp
+   50    | Exp • '>' Exp
+   51    | Exp • '<' Exp
+   52    | Exp • GE Exp
+   53    | Exp • LE Exp
+   54    | Exp • EQ Exp
+   55    | Exp • NEQ Exp
+   56    | Exp • OR Exp
+   57    | Exp • AND Exp
+
+    OR   deslocar, e ir ao estado 94
+    AND  deslocar, e ir ao estado 95
+    GE   deslocar, e ir ao estado 96
+    LE   deslocar, e ir ao estado 97
+    EQ   deslocar, e ir ao estado 98
+    NEQ  deslocar, e ir ao estado 99
+    '>'  deslocar, e ir ao estado 100
+    '<'  deslocar, e ir ao estado 101
+    '+'  deslocar, e ir ao estado 102
+    '-'  deslocar, e ir ao estado 103
+    '*'  deslocar, e ir ao estado 104
+    '/'  deslocar, e ir ao estado 105
+    ')'  deslocar, e ir ao estado 142
+
+
+Estado 136
+
+   17 IDs: IDs ',' ID '[' NUM • ']'
+   44 Atribuicao: ID '[' NUM • ']' '=' Exp
+
+    ']'  deslocar, e ir ao estado 143
+
+
+Estado 137
+
+   62 Exp: ID '[' Exp ']' •
+
+    $padrão  reduzir usando a regra 62 (Exp)
+
+
+Estado 138
+
+   44 Atribuicao: ID '[' NUM ']' '=' Exp •
+   46 Exp: Exp • '+' Exp
+   47    | Exp • '-' Exp
+   48    | Exp • '*' Exp
+   49    | Exp • '/' Exp
+   50    | Exp • '>' Exp
+   51    | Exp • '<' Exp
+   52    | Exp • GE Exp
+   53    | Exp • LE Exp
+   54    | Exp • EQ Exp
+   55    | Exp • NEQ Exp
+   56    | Exp • OR Exp
+   57    | Exp • AND Exp
+
+    OR   deslocar, e ir ao estado 94
+    AND  deslocar, e ir ao estado 95
+    GE   deslocar, e ir ao estado 96
+    LE   deslocar, e ir ao estado 97
+    EQ   deslocar, e ir ao estado 98
+    NEQ  deslocar, e ir ao estado 99
+    '>'  deslocar, e ir ao estado 100
+    '<'  deslocar, e ir ao estado 101
+    '+'  deslocar, e ir ao estado 102
+    '-'  deslocar, e ir ao estado 103
+    '*'  deslocar, e ir ao estado 104
+    '/'  deslocar, e ir ao estado 105
+
+    $padrão  reduzir usando a regra 44 (Atribuicao)
+
+
+Estado 139
+
+   42 For: FOR '(' Atribuicao ',' Exp ',' • Exp ')' Compound_Stt
+
+    NUM         deslocar, e ir ao estado 66
+    NUM_REAL    deslocar, e ir ao estado 67
+    ID          deslocar, e ir ao estado 68
+    NOT         deslocar, e ir ao estado 69
+    STRING      deslocar, e ir ao estado 70
+    CHARACTERE  deslocar, e ir ao estado 71
+    '('         deslocar, e ir ao estado 72
+
+    FunctionCall  ir ao estado 73
+    Exp           ir ao estado 144
+
+
+Estado 140
+
+   40 If: IF '(' Exp ')' Compound_Stt ELSE • Compound_Stt ENDIF
+
+    ID      deslocar, e ir ao estado 26
+    FOR     deslocar, e ir ao estado 27
+    WHILE   deslocar, e ir ao estado 28
+    IF      deslocar, e ir ao estado 29
+    RETURN  deslocar, e ir ao estado 30
+    DO      deslocar, e ir ao estado 31
+    '{'     deslocar, e ir ao estado 55
+
+    FunctionCall  ir ao estado 32
+    Statement     ir ao estado 56
+    Compound_Stt  ir ao estado 145
+    If            ir ao estado 35
+    While         ir ao estado 36
+    For           ir ao estado 37
+    DoWhile       ir ao estado 38
+    Atribuicao    ir ao estado 39
+
+
+Estado 141
+
+   39 If: IF '(' Exp ')' Compound_Stt ENDIF •
+
+    $padrão  reduzir usando a regra 39 (If)
+
+
+Estado 142
+
+   43 DoWhile: DO Compound_Stt WHILE '(' Exp ')' • ';'
+
+    ';'  deslocar, e ir ao estado 146
+
+
+Estado 143
+
+   17 IDs: IDs ',' ID '[' NUM ']' •
+   44 Atribuicao: ID '[' NUM ']' • '=' Exp
+
+    '='  deslocar, e ir ao estado 131
+
+    $padrão  reduzir usando a regra 17 (IDs)
+
+
+Estado 144
+
+   42 For: FOR '(' Atribuicao ',' Exp ',' Exp • ')' Compound_Stt
+   46 Exp: Exp • '+' Exp
+   47    | Exp • '-' Exp
+   48    | Exp • '*' Exp
+   49    | Exp • '/' Exp
+   50    | Exp • '>' Exp
+   51    | Exp • '<' Exp
+   52    | Exp • GE Exp
+   53    | Exp • LE Exp
+   54    | Exp • EQ Exp
+   55    | Exp • NEQ Exp
+   56    | Exp • OR Exp
+   57    | Exp • AND Exp
+
+    OR   deslocar, e ir ao estado 94
+    AND  deslocar, e ir ao estado 95
+    GE   deslocar, e ir ao estado 96
+    LE   deslocar, e ir ao estado 97
+    EQ   deslocar, e ir ao estado 98
+    NEQ  deslocar, e ir ao estado 99
+    '>'  deslocar, e ir ao estado 100
+    '<'  deslocar, e ir ao estado 101
+    '+'  deslocar, e ir ao estado 102
+    '-'  deslocar, e ir ao estado 103
+    '*'  deslocar, e ir ao estado 104
+    '/'  deslocar, e ir ao estado 105
+    ')'  deslocar, e ir ao estado 147
+
+
+Estado 145
+
+   40 If: IF '(' Exp ')' Compound_Stt ELSE Compound_Stt • ENDIF
+
+    ENDIF  deslocar, e ir ao estado 148
+
+
+Estado 146
+
+   43 DoWhile: DO Compound_Stt WHILE '(' Exp ')' ';' •
+
+    $padrão  reduzir usando a regra 43 (DoWhile)
+
+
+Estado 147
+
+   42 For: FOR '(' Atribuicao ',' Exp ',' Exp ')' • Compound_Stt
+
+    ID      deslocar, e ir ao estado 26
+    FOR     deslocar, e ir ao estado 27
+    WHILE   deslocar, e ir ao estado 28
+    IF      deslocar, e ir ao estado 29
+    RETURN  deslocar, e ir ao estado 30
+    DO      deslocar, e ir ao estado 31
+    '{'     deslocar, e ir ao estado 55
+
+    FunctionCall  ir ao estado 32
+    Statement     ir ao estado 56
+    Compound_Stt  ir ao estado 149
+    If            ir ao estado 35
+    While         ir ao estado 36
+    For           ir ao estado 37
+    DoWhile       ir ao estado 38
+    Atribuicao    ir ao estado 39
+
+
+Estado 148
+
+   40 If: IF '(' Exp ')' Compound_Stt ELSE Compound_Stt ENDIF •
+
+    $padrão  reduzir usando a regra 40 (If)
+
+
+Estado 149
+
+   42 For: FOR '(' Atribuicao ',' Exp ',' Exp ')' Compound_Stt •
+
+    $padrão  reduzir usando a regra 42 (For)
